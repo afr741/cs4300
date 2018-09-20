@@ -37,15 +37,61 @@ class Rectangle : public Shape {
 
 int main(int argc, char * argv[])
 {
+	int wWidth = 300;
+	int wHeight = 300;
+	
 
-    // create a new window of size 400 by 400 pixels
-    // top-left of the window is (0,0) and bottom-right is (w,h)
-    const int wWidth = 800;
-    const int wHeight = 600;
-    sf::RenderWindow window(sf::VideoMode(wWidth, wHeight), "SFML works!");
+
+
+	std::vector<Shape> shapes;
+
+	std::ifstream cin("config.txt");
+
+	std::string token, color, shapeN;
+	int width, height, R, G, B;
+	float posx, posy, speedx, speedy, radc;
+
+	while (cin.good())
+	{
+		cin >> token, shapeN;
+
+		if (token == "Window")
+		{
+			cin >> width >> height;
+			std::cout << "dimension: " << width << "," << height << std::endl;
+			wWidth = width;
+			wHeight = height;
+
+			
+		}
+
+		if (token == "Circle" || shapeN == "CGreen")
+		{
+			cin >> shapeN >> posx >> posy >> speedx >> speedy >> R >> G >> B >> radc;
+			std::cout << "parameters of circle: " << shapeN << "," << posx << "," << posy << "," << speedx << "," << speedy << "," << R << "," << G << "," << B << "," << radc;
+			
+
+
+		}
+	}
+	sf::RenderWindow window(sf::VideoMode(wWidth, wHeight), "SFML works!");
+
+	//struct myShape {
+		//shared.ptr<sf::shape>
+			//name
+			//speed
+	//};
+
+	sf::Vector2f velocity;
+	velocity.x = 1;
+	velocity.y = 1;
+
 
 	float circlex = 300.0f;
 	float circley = 50.0f;
+
+
+
 	 
 	float circle2x = 100.0f;
 	float circle2y = 100.0f;
@@ -78,38 +124,7 @@ int main(int argc, char * argv[])
 	float rectMoveSpeedx = 0.4f;          // we will use this to move the circle later
 	float rectMoveSpeedy = 0.4f;
 
-	std::vector<Shape> shapes;
-
-	std::ifstream cin("config.txt");
-
-	std::string token, color;
-	int width, height;
-
-	while (cin.good())
-	{
-		cin >> token;
-
-		if (token == "Window")
-		{
-			cin >> width >> height;
-			std::cout << "\dimension: " << width << "," << height;
-			sf::RenderWindow window(sf::VideoMode(wWidth, wHeight), "SFML works!");
-		}
-	}
-
-
-	//struct myShape {
-		//shared.ptr<sf::shape>
-			//name
-			//speed
-	//};
-
-	sf::Vector2f velocity;
-	velocity.x = 1;
-	velocity.y = 1;
-
 	
-
 
 
     // let's load a font so we can display some text
